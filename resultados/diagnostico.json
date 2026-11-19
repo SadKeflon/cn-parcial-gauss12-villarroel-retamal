@@ -1,0 +1,113 @@
+{
+  "condicion_2": 30847437495267.223,
+  "cota_cond_eps": 0.006849507071586208,
+  "referencia_solo_control": "mpmath.lu_solve a 100 cifras",
+  "metodos": {
+    "sin_pivoteo": {
+      "flops_base": 1366,
+      "flops_pivote_extra": 0,
+      "comparaciones_pivote": 0,
+      "comparaciones_escalas": 0,
+      "intercambios": 0,
+      "multiplicador_maximo": 27525928321026.33,
+      "factor_crecimiento": 2641.224254821782,
+      "residuo_inicial": "7.154579002098625744160642626E-7",
+      "residuo_refinado": "2.603187369605071005196350598E-10",
+      "residuo_final": "2.603187369605071005196350598E-10",
+      "refinamiento_seleccionado": true,
+      "error_relativo_antes_refinamiento": 2.0802076840924034e-10,
+      "error_relativo_despues_refinamiento": 6.015950027807113e-17,
+      "error_relativo_control_extendido": 6.015950027807113e-17
+    },
+    "pivoteo_escalado": {
+      "flops_base": 1366,
+      "flops_pivote_extra": 77,
+      "comparaciones_pivote": 66,
+      "comparaciones_escalas": 132,
+      "intercambios": 8,
+      "multiplicador_maximo": 2465558200.6506004,
+      "factor_crecimiento": 1.7832023316171275,
+      "residuo_inicial": "6.036461860180701982869777567E-10",
+      "residuo_refinado": "2.603187369605071005196350598E-10",
+      "residuo_final": "2.603187369605071005196350598E-10",
+      "refinamiento_seleccionado": true,
+      "error_relativo_antes_refinamiento": 2.3565179633046725e-13,
+      "error_relativo_despues_refinamiento": 6.015950027807113e-17,
+      "error_relativo_control_extendido": 6.015950027807113e-17
+    }
+  },
+  "solucion": [
+    {
+      "variable": "x1",
+      "valor_float64": 0.7384915627,
+      "digitos_defendibles": 15,
+      "referencia_control": "0.7384915627"
+    },
+    {
+      "variable": "x2",
+      "valor_float64": -1.2059374168,
+      "digitos_defendibles": 15,
+      "referencia_control": "-1.2059374168"
+    },
+    {
+      "variable": "x3",
+      "valor_float64": 0.0043871952,
+      "digitos_defendibles": 16,
+      "referencia_control": "0.0043871952"
+    },
+    {
+      "variable": "x4",
+      "valor_float64": -0.0917264538,
+      "digitos_defendibles": 16,
+      "referencia_control": "-0.0917264538"
+    },
+    {
+      "variable": "x5",
+      "valor_float64": 2.8461093725,
+      "digitos_defendibles": 16,
+      "referencia_control": "2.8461093725"
+    },
+    {
+      "variable": "x6",
+      "valor_float64": -0.0062815409,
+      "digitos_defendibles": 16,
+      "referencia_control": "-0.0062815409"
+    },
+    {
+      "variable": "x7",
+      "valor_float64": 1.4738205916,
+      "digitos_defendibles": 16,
+      "referencia_control": "1.4738205916"
+    },
+    {
+      "variable": "x8",
+      "valor_float64": -0.0384927164,
+      "digitos_defendibles": 16,
+      "referencia_control": "-0.0384927164"
+    },
+    {
+      "variable": "x9",
+      "valor_float64": 0.9152648037,
+      "digitos_defendibles": 16,
+      "referencia_control": "0.9152648037"
+    },
+    {
+      "variable": "x10",
+      "valor_float64": -2.6071394852,
+      "digitos_defendibles": 15,
+      "referencia_control": "-2.6071394852"
+    },
+    {
+      "variable": "x11",
+      "valor_float64": 0.0518736294,
+      "digitos_defendibles": 15,
+      "referencia_control": "0.0518736294"
+    },
+    {
+      "variable": "x12",
+      "valor_float64": -1.0849371625,
+      "digitos_defendibles": 15,
+      "referencia_control": "-1.0849371625"
+    }
+  ]
+}

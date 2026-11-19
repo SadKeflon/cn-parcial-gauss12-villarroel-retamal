@@ -1,0 +1,40 @@
+VERIFICACIÓN DEL LABORATORIO 3
+Residuo r=b-Ax con Decimal (80 dígitos) y A,b originales sin redondeo.
+Cada x float64 se convierte exactamente con Decimal.from_float.
+Numpy y mpmath se usan solo como controles independientes.
+
+cond_2(A) estimada con numpy.linalg.cond: 3.084743749527e+13
+epsilon float64: 2.220446049250e-16
+cond_2(A) * epsilon: 6.849507071586e-03
+
+MÉTODO: sin_pivoteo
+max |multiplicador|: 2.752592832103e+13
+factor de crecimiento: 2.641224254822e+03
+bits potencialmente comprometidos (heurística, NO bits medidos): 44.646
+||residuo inicial||_inf: 7.154579002098625744160642626E-7
+||residuo tras una pasada de refinamiento||_inf: 2.603187369605071005196350598E-10
+refinamiento seleccionado por mejora del residuo: True
+||residuo final||_inf: 2.603187369605071005196350598E-10
+||corrección||_inf: 5.920498587243e-10
+error relativo SIN refinamiento respecto al control extendido: 2.080207684092e-10
+error relativo DESPUES de una pasada respecto al control extendido: 6.015950027807e-17
+error relativo FINAL respecto al control extendido: 6.015950027807e-17
+error normalizado de PA-LU: 2.211825625890e-13
+
+MÉTODO: pivoteo_escalado
+max |multiplicador|: 2.465558200651e+09
+factor de crecimiento: 1.783202331617e+00
+bits potencialmente comprometidos (heurística, NO bits medidos): 31.199
+||residuo inicial||_inf: 6.036461860180701982869777567E-10
+||residuo tras una pasada de refinamiento||_inf: 2.603187369605071005196350598E-10
+refinamiento seleccionado por mejora del residuo: True
+||residuo final||_inf: 2.603187369605071005196350598E-10
+||corrección||_inf: 6.706907861824e-13
+error relativo SIN refinamiento respecto al control extendido: 2.356517963305e-13
+error relativo DESPUES de una pasada respecto al control extendido: 6.015950027807e-17
+error relativo FINAL respecto al control extendido: 6.015950027807e-17
+error normalizado de PA-LU: 2.408084513762e-16
+
+CONTROL numpy.linalg.solve (no utilizado como solución principal):
+Error relativo frente a NumPy: 2.547709417994e-13
+CONTROL mpmath.lu_solve, 100 cifras: solo referencia de comparación de dígitos.
