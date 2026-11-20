@@ -54,7 +54,9 @@ Respecto a la referencia aproximada de 1486 del enunciado, 1366 difiere en −8,
 
 El pivote a(1,1)=1.3407×10⁻⁸ es inaceptable en comparación con coeficientes de otras filas en la primera columna. Sin intercambio se genera un multiplicador del orden de 10¹³, lo cual compromete potencialmente log₂(2.75×10¹³)≈44,65 bits por amplificación en operaciones susceptibles a cancelación. Con pivoteo escalado el máximo multiplicador global cae a ~2.47×10⁹ (estimación heurística de ~31,20 bits potencialmente afectados), y sobre todo el crecimiento de coeficientes baja de ~2641 a ~1,78. **Estas cifras en bits son indicadores de riesgo, no una medición literal de bits exactos perdidos**. La calidad se contrasta cuantitativamente con el error y el residuo.
 
-Los errores relativos observados en esta ejecución son mejores que algunas cifras orientativas anticipadas en el texto del profesor; por eso se reportan los valores medidos y no se presentan las referencias como resultados experimentales. La comparación consolidada está en `resultados/comparacion_metodos.md`, incorporada durante la integración final de Kevin; registra que el factor de crecimiento sin pivoteo fue aproximadamente 1.481 veces el escalado y que el residuo inicial fue aproximadamente 1.185 veces mayor.
+Los errores relativos observados en esta ejecución son mejores que algunas cifras orientativas anticipadas en el texto del profesor; por eso se reportan los valores medidos y no se presentan las referencias como resultados experimentales. 
+La comparación consolidada está en `resultados/comparacion_metodos.md`. El factor de crecimiento sin pivoteo fue aproximadamente 1,481 × 10³ veces (unas 1481 veces) el del pivoteo escalado. Asimismo, el residuo inicial sin pivoteo fue aproximadamente 1,185 × 10³ veces (unas 1185 veces) mayor.
+
 
 ## Condicionamiento
 
