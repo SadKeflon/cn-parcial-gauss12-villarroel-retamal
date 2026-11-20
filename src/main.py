@@ -14,6 +14,8 @@ RAIZ = Path(__file__).resolve().parent.parent
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
+from src.comparacion import generar_comparacion  # noqa: E402
+
 from src.cargar_datos import cargar_sistema  # noqa: E402
 from src.conteo import ContadorOperaciones  # noqa: E402
 from src.consistencia import verificar_factorizacion, verificar_triangular_superior  # noqa: E402
@@ -266,6 +268,13 @@ def ejecutar():
     (RESULTADOS / "diagnostico.json").write_text(
         json.dumps(resumen, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
+
+    # Informe comparativo de los dos métodos.
+    (RESULTADOS / "comparacion_metodos.md").write_text(
+        generar_comparacion(resumen),
+        encoding="utf-8"
+    )
+
     print("Resultados regenerados en:", RESULTADOS)
     print("Flops base:", mejor["contador"].flops_aritmeticos)
     print("Residuo final (norma infinito):", mejor["residuo_final"])
