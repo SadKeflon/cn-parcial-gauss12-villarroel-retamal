@@ -15,7 +15,6 @@ if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
 from src.comparacion import generar_comparacion  # noqa: E402
-
 from src.cargar_datos import cargar_sistema  # noqa: E402
 from src.conteo import ContadorOperaciones  # noqa: E402
 from src.consistencia import verificar_factorizacion, verificar_triangular_superior  # noqa: E402
@@ -72,8 +71,10 @@ def realizar_corrida(A, b, metodo):
         "x_final": x_final,
         "refinamiento_aplicado": usar_refinamiento,
         "residuo_antes": norma_infinito(r_antes),
+        "vector_residuo_inicial": r_antes,
         "residuo_refinado": info["residuo_despues"],
         "residuo_final": norma_infinito(r_final),
+        "vector_residuo_final": r_final,
         "correccion_maxima": info["norma_correccion"],
         "error_factorizacion": error_factorizacion,
         "intercambios": intercambios,
@@ -183,6 +184,15 @@ def generar_residuo(corridas, condicion, cota, control_np, referencia):
             f"error normalizado de PA-LU: {corrida['error_factorizacion']:.12e}",
             "",
         ])
+        # Vector residual completo: requisito de resultados/residuo.txt.
+        # El cálculo Decimal ya se realizó en realizar_corrida; no refactorizar.
+        salida.append("COMPONENTES DEL RESIDUO INICIAL r=b-Ax:")
+        for i, valor in enumerate(corrida["vector_residuo_inicial"], start=1):
+            salida.append(f"r_inicial[{i}] = {valor}")
+        salida.append("COMPONENTES DEL RESIDUO FINAL r=b-Ax_final:")
+        for i, valor in enumerate(corrida["vector_residuo_final"], start=1):
+            salida.append(f"r_final[{i}] = {valor}")
+        salida.append("")
     mejor = next(c for c in corridas if c["metodo"] == "pivoteo_escalado")
     salida.append("CONTROL numpy.linalg.solve (no utilizado como solución principal):")
     salida.append(f"Error relativo frente a NumPy: {error_relativo_infinito(mejor['x_final'], [str(v) for v in control_np]):.12e}")
@@ -268,13 +278,11 @@ def ejecutar():
     (RESULTADOS / "diagnostico.json").write_text(
         json.dumps(resumen, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-
     # Informe comparativo de los dos métodos.
     (RESULTADOS / "comparacion_metodos.md").write_text(
         generar_comparacion(resumen),
         encoding="utf-8"
     )
-
     print("Resultados regenerados en:", RESULTADOS)
     print("Flops base:", mejor["contador"].flops_aritmeticos)
     print("Residuo final (norma infinito):", mejor["residuo_final"])

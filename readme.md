@@ -6,7 +6,7 @@ Resuelve el sistema denso 12×12 del enunciado de Computación Numérica y compa
 
 ## Requisitos
 
-Python 3.10 o superior.
+Python 3.12 o superior (validado con Python 3.13.16). Dependencias con versiones fijas en `requirements.txt`:
 
 ```bash
 python -m pip install -r requirements.txt
@@ -26,7 +26,7 @@ El primer comando **reproduce automáticamente** los archivos `resultados/soluci
 - `datos/`: 144 coeficientes de A y 12 valores de b, sin redondear.
 - `src/`: algoritmos de Gauss, pivoteo, sustitución, conteo y verificación.
 - `tests/`: pruebas de funciones y reproducción integral.
-- `resultados/`: tablas, trazas y comparación de métodos regenerables con `python src/main.py`.
+- `resultados/`: tablas, trazas, residuos completos y comparación de métodos regenerables con `python src/main.py`.
 - `informe.md`: análisis técnico y justificación numérica.
 
 ## Resultado resumido
