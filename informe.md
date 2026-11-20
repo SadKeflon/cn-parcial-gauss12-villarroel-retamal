@@ -54,11 +54,15 @@ Respecto a la referencia aproximada de 1486 del enunciado, 1366 difiere en −8,
 
 El pivote a(1,1)=1.3407×10⁻⁸ es inaceptable en comparación con coeficientes de otras filas en la primera columna. Sin intercambio se genera un multiplicador del orden de 10¹³, lo cual compromete potencialmente log₂(2.75×10¹³)≈44,65 bits por amplificación en operaciones susceptibles a cancelación. Con pivoteo escalado el máximo multiplicador global cae a ~2.47×10⁹ (estimación heurística de ~31,20 bits potencialmente afectados), y sobre todo el crecimiento de coeficientes baja de ~2641 a ~1,78. **Estas cifras en bits son indicadores de riesgo, no una medición literal de bits exactos perdidos**. La calidad se contrasta cuantitativamente con el error y el residuo.
 
+Como indicador **empírico** adicional, se estiman los bits de precisión relativos a partir de `-log₂(error relativo)` frente al control extendido. Antes del refinamiento se obtienen aproximadamente **32,16 bits efectivos** sin pivoteo y **41,95 bits efectivos** con pivoteo escalado. Respecto de los 53 bits de precisión del formato float64, esto corresponde orientativamente a **20,84** y **11,05 bits de precisión no recuperados**, respectivamente. Estos valores describen el error final de la solución y **no son una medición de bits descartados en operaciones individuales**.
+
 Los errores relativos observados en esta ejecución son mejores que algunas cifras orientativas anticipadas en el texto del profesor; por eso se reportan los valores medidos y no se presentan las referencias como resultados experimentales. La comparación consolidada está en `resultados/comparacion_metodos.md`. El factor de crecimiento sin pivoteo fue aproximadamente 1,481 × 10³ veces (unas 1481 veces) el del pivoteo escalado. Asimismo, el residuo inicial sin pivoteo fue aproximadamente 1,185 × 10³ veces (unas 1185 veces) mayor.
 
 ## Condicionamiento
 
 `numpy.linalg.cond(A,2)` estima κ₂(A)≈**3.08474375e+13**. En doble precisión ε≈2.22044605×10⁻¹⁶, de modo que κ₂(A) ε≈**6.84950707e-03**. Esta cota de peor caso no garantiza muchos dígitos correctos, pero no predice necesariamente el error de la corrida concreta: la estructura del sistema y el residuo importan. En efecto, los controles independientes ofrecen un error relativo muy inferior a la cota en esta instancia. La casi dependencia de la fila 7 (señalada en el enunciado) explica buena parte del alto κ₂.
+
+La estimación κ₂(A)·ε ≈ 6,85×10⁻³ equivale aproximadamente a un **0,685 % de error relativo** en una cota orientativa de peor caso. Bajo el criterio conservador usado aquí, error relativo menor que 0,5·10⁻ᵈ para declarar d cifras, esta cota **no permite garantizar dos cifras significativas correctas**: para d=2 el límite sería 5×10⁻³. Ello no impide que esta instancia concreta muestre muchas más cifras correctas al contrastar el resultado con el control extendido, particularmente después del refinamiento. La cota de condición es una estimación pesimista, no una predicción exacta del error observado.
 
 ## Resultados
 
@@ -85,7 +89,7 @@ Para cada variable, el valor `float64` sin redondear y el valor presentado se en
 
 El residuo r=b−Ax se calcula sumando productos con `Decimal` y precisión de 80 cifras, usando la representación exacta del `float64` calculado para x y los decimales originales de A,b. Para pivoteo escalado, **||r inicial||∞=6.036461860180701982869777567E-10**, y tras una pasada de refinamiento **||r||∞=2.603187369605071005196350598E-10**. Para el método sin pivoteo, los valores respectivos son **7.154579002098625744160642626E-7** y **2.603187369605071005196350598E-10**. El refinamiento resuelve L U δ=P r mediante sustituciones, reutilizando la factorización inicial.
 
-La comprobación externa usa `numpy.linalg.solve` como control float64 y `mpmath.lu_solve` a 100 cifras solo para una referencia independiente de precisión; **ninguna de esas soluciones se usa para calcular la solución principal**. La traza de 11 pasos por método está en `resultados/traza_eliminacion.txt`. También se comprueba el error normalizado de PA−LU y la presencia de exactamente 66 ceros subdiagonales.
+La comprobación externa usa `numpy.linalg.solve` como control float64 y `mpmath.lu_solve` a 100 cifras solo para una referencia independiente de precisión; **ninguna de esas soluciones se usa para calcular la solución principal**. El vector residual inicial y final completo de 12 componentes para cada método se publica en `resultados/residuo.txt`, junto a sus normas infinito. La traza de 11 pasos por método está en `resultados/traza_eliminacion.txt`. También se comprueba el error normalizado de PA−LU y la presencia de exactamente 66 ceros subdiagonales.
 
 ## Conclusiones
 
@@ -95,7 +99,7 @@ Si n=1000, el costo cúbico dominaría aún más: mantendríamos una sola factor
 
 ## Reproducibilidad
 
-Requisitos: Python ≥3.10, NumPy ≥2.0 y <3, mpmath ≥1.3 y pytest ≥8 (véase `requirements.txt`). Ejecutar desde la raíz del repositorio:
+Requisitos del entorno reproducible: Python **3.12 o superior** (validado con **3.13.16**), NumPy **2.5.5**, mpmath **1.4.1** y pytest **9.2.0** (versiones fijas en `requirements.txt`). Ejecutar desde la raíz del repositorio:
 
 ```bash
 python -m pip install -r requirements.txt
@@ -103,12 +107,10 @@ python -m pytest -q
 python src/main.py
 ```
 
-El último comando recrea los seis archivos de `resultados/`, incluido `comparacion_metodos.md`. Para comprobar la reproducibilidad, primero se deben instalar las dependencias y ejecutar las pruebas desde la raíz del repositorio.
+El último comando regenera los seis archivos de `resultados/`, incluido `comparacion_metodos.md`. La ejecución de `python src/main.py` en el entorno de Kevin produjo **1366 flops base** y una norma infinito del residuo final de **2.603187369605071005196350598E-10**. Después, `git status` indicó que `main` estaba al día y sin cambios, verificando que la regeneración previa a esta ampliación reprodujo los archivos versionados. La presente corrección añade los componentes individuales del residuo sin alterar la factorización ni la solución.
 
-**Entorno de validación de Kevin (Windows):** Python **3.13.16**, NumPy **2.5.5**, mpmath **1.4.1** y pytest **9.2.0**. Sobre la versión de `main` que contiene las cuatro fusiones, Kevin ejecutó `python -m pytest -q` y obtuvo **39 pruebas aprobadas**.
+**Entorno de validación de Kevin (Windows):** Python **3.13.16**, NumPy **2.5.5**, mpmath **1.4.1** y pytest **9.2.0**. Kevin verificó **39 pruebas aprobadas** sobre la versión integrada con los cinco Pull Requests anteriores a esta corrección. La presente revisión incorpora una prueba adicional del vector residual; la batería completa se ejecuta mediante el comando indicado arriba.
 
-La ejecución directa de `python src/main.py` permite generar de nuevo los archivos de `resultados/`. Su regeneración debe comprobarse al preparar la entrega final, junto con `git status`, para detectar cualquier diferencia en los archivos generados. No se atribuyen estas versiones del entorno a Rodrigo sin verificarlas en su equipo.
+**Declaración de asistentes de IA:** se utilizó apoyo de asistentes de IA para estructurar el trabajo, proponer implementaciones y pruebas, revisar cambios en GitHub, preparar archivos por commit y redactar borradores del README y del informe. La revisión, comprensión, ejecución local y defensa del código son responsabilidad de los estudiantes.
 
-**Declaración de asistentes de IA:** se utilizó apoyo de asistentes de IA para estructurar el trabajo, proponer implementaciones y pruebas, revisar cambios en GitHub, preparar archivos por commit y redactar borradores del README y del informe. La ejecución local, la revisión académica y la defensa de cada línea son responsabilidad de Kevin y Rodrigo. Ambos integrantes deben revisar esta declaración, precisar cualquier uso adicional de IA y asegurarse de que describe fielmente su proceso real.
-
-**Fuentes:** enunciado oficial «El pivote: Eliminación gaussiana con mínimo costo operacional y máxima exactitud de mantisa» (incluido en el paquete de traspaso), documentación estándar de Python (`decimal`, `csv`, `math`), NumPy y mpmath. Incorporar otras referencias consultadas durante la implementación, si corresponde.
+**Fuentes:** Universidad Católica del Maule, Computación Numérica (INF-321), enunciado oficial del Laboratorio 3 «El pivote: Eliminación gaussiana con mínimo costo operacional y máxima exactitud de mantisa», noviembre de 2026; documentación estándar de Python (`decimal`, `csv`, `math`), NumPy y mpmath.
