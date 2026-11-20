@@ -4,7 +4,7 @@
 
 **Estudiantes:** Kevin Andrés Villarroel Duarte y Rodrigo Alonso Retamal Parada.  
 **Asignatura:** Computación Numérica, INF-321, Universidad Católica del Maule.  
-**Fecha:** 19 de noviembre de 2026 (revisar según la fecha efectiva de entrega).  
+**Fecha:** 19 de noviembre de 2026.  
 **Repositorio:** https://github.com/SadKeflon/cn-parcial-gauss12-villarroel-retamal
 
 ## Planteamiento
@@ -54,9 +54,7 @@ Respecto a la referencia aproximada de 1486 del enunciado, 1366 difiere en −8,
 
 El pivote a(1,1)=1.3407×10⁻⁸ es inaceptable en comparación con coeficientes de otras filas en la primera columna. Sin intercambio se genera un multiplicador del orden de 10¹³, lo cual compromete potencialmente log₂(2.75×10¹³)≈44,65 bits por amplificación en operaciones susceptibles a cancelación. Con pivoteo escalado el máximo multiplicador global cae a ~2.47×10⁹ (estimación heurística de ~31,20 bits potencialmente afectados), y sobre todo el crecimiento de coeficientes baja de ~2641 a ~1,78. **Estas cifras en bits son indicadores de riesgo, no una medición literal de bits exactos perdidos**. La calidad se contrasta cuantitativamente con el error y el residuo.
 
-Los errores relativos observados en esta ejecución son mejores que algunas cifras orientativas anticipadas en el texto del profesor; por eso se reportan los valores medidos y no se presentan las referencias como resultados experimentales. 
-La comparación consolidada está en `resultados/comparacion_metodos.md`. El factor de crecimiento sin pivoteo fue aproximadamente 1,481 × 10³ veces (unas 1481 veces) el del pivoteo escalado. Asimismo, el residuo inicial sin pivoteo fue aproximadamente 1,185 × 10³ veces (unas 1185 veces) mayor.
-
+Los errores relativos observados en esta ejecución son mejores que algunas cifras orientativas anticipadas en el texto del profesor; por eso se reportan los valores medidos y no se presentan las referencias como resultados experimentales. La comparación consolidada está en `resultados/comparacion_metodos.md`. El factor de crecimiento sin pivoteo fue aproximadamente 1,481 × 10³ veces (unas 1481 veces) el del pivoteo escalado. Asimismo, el residuo inicial sin pivoteo fue aproximadamente 1,185 × 10³ veces (unas 1185 veces) mayor.
 
 ## Condicionamiento
 
@@ -105,8 +103,12 @@ python -m pytest -q
 python src/main.py
 ```
 
-El último comando recrea los seis archivos de `resultados/`, incluido `comparacion_metodos.md` después del commit 13 de integración. Durante el desarrollo en Windows se utilizó Python 3.14.8; antes de entregar, cada integrante debe repetir las pruebas en la versión final de `main` y comprobar las dependencias instaladas mediante `python --version` y `python -m pip show numpy mpmath pytest`. **No se afirma que la validación posterior a la fusión se haya ejecutado hasta realizar esos comandos.**
+El último comando recrea los seis archivos de `resultados/`, incluido `comparacion_metodos.md`. Para comprobar la reproducibilidad, primero se deben instalar las dependencias y ejecutar las pruebas desde la raíz del repositorio.
 
-**Declaración de asistentes de IA:** se utilizó apoyo de asistentes de IA para estructurar el trabajo, proponer implementaciones y pruebas, revisar cambios en GitHub, preparar archivos por commit y redactar borradores del README y del informe. La ejecución local, la revisión académica y la defensa de cada línea son responsabilidad de Kevin y Rodrigo. Antes de entregar, ambos deben revisar esta declaración, precisar cualquier uso adicional de IA y asegurarse de que describe fielmente su proceso real.
+**Entorno de validación de Kevin (Windows):** Python **3.13.16**, NumPy **2.5.5**, mpmath **1.4.1** y pytest **9.2.0**. Sobre la versión de `main` que contiene las cuatro fusiones, Kevin ejecutó `python -m pytest -q` y obtuvo **39 pruebas aprobadas**.
+
+La ejecución directa de `python src/main.py` permite generar de nuevo los archivos de `resultados/`. Su regeneración debe comprobarse al preparar la entrega final, junto con `git status`, para detectar cualquier diferencia en los archivos generados. No se atribuyen estas versiones del entorno a Rodrigo sin verificarlas en su equipo.
+
+**Declaración de asistentes de IA:** se utilizó apoyo de asistentes de IA para estructurar el trabajo, proponer implementaciones y pruebas, revisar cambios en GitHub, preparar archivos por commit y redactar borradores del README y del informe. La ejecución local, la revisión académica y la defensa de cada línea son responsabilidad de Kevin y Rodrigo. Ambos integrantes deben revisar esta declaración, precisar cualquier uso adicional de IA y asegurarse de que describe fielmente su proceso real.
 
 **Fuentes:** enunciado oficial «El pivote: Eliminación gaussiana con mínimo costo operacional y máxima exactitud de mantisa» (incluido en el paquete de traspaso), documentación estándar de Python (`decimal`, `csv`, `math`), NumPy y mpmath. Incorporar otras referencias consultadas durante la implementación, si corresponde.
