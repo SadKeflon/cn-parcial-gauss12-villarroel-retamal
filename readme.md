@@ -23,11 +23,21 @@ El primer comando **reproduce automáticamente** los archivos `resultados/soluci
 
 ## Estructura
 
-- `datos/`: 144 coeficientes de A y 12 valores de b, sin redondear.
-- `src/`: algoritmos de Gauss, pivoteo, sustitución, conteo y verificación.
-- `tests/`: pruebas de funciones y reproducción integral.
-- `resultados/`: tablas, trazas, residuos completos y comparación de métodos regenerables con `python src/main.py`.
-- `informe.md`: análisis técnico y justificación numérica.
+```text
+cn-parcial-gauss12-villarroel-retamal/
+├── readme.md          # Instrucciones y resumen
+├── informe.md         # Análisis técnico y justificación numérica
+├── requirements.txt   # Dependencias con versiones fijas
+├── datos/             # Matriz A y vector b originales, sin redondear
+│   ├── matriz_a.csv
+│   └── vector_b.csv
+├── src/               # Implementación, diagnóstico y programa principal
+│   └── main.py        # Punto de entrada reproducible
+├── tests/             # Pruebas automatizadas
+└── resultados/        # Tablas, trazas, residuos y comparación
+```
+
+Los archivos de `resultados/` se regeneran mediante `python src/main.py`.
 
 ## Resultado resumido
 

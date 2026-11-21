@@ -111,6 +111,6 @@ El último comando regenera los seis archivos de `resultados/`, incluido `compar
 
 **Entorno de validación de Kevin (Windows):** Python **3.13.16**, NumPy **2.5.5**, mpmath **1.4.1** y pytest **9.2.0**. Kevin verificó **39 pruebas aprobadas** sobre la versión integrada con los cinco Pull Requests anteriores a esta corrección. La presente revisión incorpora una prueba adicional del vector residual; la batería completa se ejecuta mediante el comando indicado arriba.
 
-**Declaración de asistentes de IA:** se utilizó apoyo de asistentes de IA para estructurar el trabajo, proponer implementaciones y pruebas, revisar cambios en GitHub, preparar archivos por commit y redactar borradores del README y del informe. La revisión, comprensión, ejecución local y defensa del código son responsabilidad de los estudiantes.
+**Declaración de uso de IA:** se utilizó ChatGPT de OpenAI como apoyo para organizar y estructurar las etapas del trabajo, así como para preparar borradores de código, pruebas y documentación, y revisar cambios. La validación de los resultados y la defensa del código son responsabilidad de los estudiantes.
 
 **Fuentes:** Universidad Católica del Maule, Computación Numérica (INF-321), enunciado oficial del Laboratorio 3 «El pivote: Eliminación gaussiana con mínimo costo operacional y máxima exactitud de mantisa», noviembre de 2026; documentación estándar de Python (`decimal`, `csv`, `math`), NumPy y mpmath.
