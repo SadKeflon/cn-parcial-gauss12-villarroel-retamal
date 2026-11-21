@@ -48,7 +48,8 @@ def control_numpy(A, b):
 def control_mpmath(A, b, precision=100):
     """Referencia de control independiente de alta precisión, nunca solución principal.
 
-    Se usa para estimar dígitos defendibles; debe declararse en el informe.
+    Se utiliza como referencia independiente de alta precisión para evaluar
+    el error y estimar los dígitos significativos defendibles.
     """
     import mpmath as mp
 
