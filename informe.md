@@ -107,9 +107,12 @@ python -m pytest -q
 python src/main.py
 ```
 
-El último comando regenera los seis archivos de `resultados/`, incluido `comparacion_metodos.md`. La ejecución de `python src/main.py` en el entorno de Kevin produjo **1366 flops base** y una norma infinito del residuo final de **2.603187369605071005196350598E-10**. Después, `git status` indicó que `main` estaba al día y sin cambios, verificando que la regeneración previa a esta ampliación reprodujo los archivos versionados. La presente corrección añade los componentes individuales del residuo sin alterar la factorización ni la solución.
+El comando `python src/main.py` regenera automáticamente los seis archivos de `resultados/`, incluyendo los vectores residuales iniciales y finales de ambos métodos.
 
-**Entorno de validación de Kevin (Windows):** Python **3.13.16**, NumPy **2.5.5**, mpmath **1.4.1** y pytest **9.2.0**. Kevin verificó **39 pruebas aprobadas** sobre la versión integrada con los cinco Pull Requests anteriores a esta corrección. La presente revisión incorpora una prueba adicional del vector residual; la batería completa se ejecuta mediante el comando indicado arriba.
+La ejecución produce **1366 flops aritméticas base** y una norma infinito del residuo final de **2.603187369605071005196350598E-10**.
+
+**Entorno de validación:** Windows, Python **3.13.16**, NumPy **2.5.5**, mpmath **1.4.1** y pytest **9.2.0**. Se ejecutaron **40 pruebas automatizadas**, todas aprobadas.
+
 
 **Declaración de uso de IA:** se utilizó ChatGPT de OpenAI como apoyo para organizar y estructurar las etapas del trabajo, así como para preparar borradores de código, pruebas y documentación, y revisar cambios. La validación de los resultados y la defensa del código son responsabilidad de los estudiantes.
 

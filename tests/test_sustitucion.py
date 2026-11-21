@@ -59,7 +59,8 @@ def test_detecta_pivote_cero():
 def test_solucion_del_sistema_12x12():
     A, b = cargar_sistema()
 
-    # Primero triangularizamos utilizando el método del commit 4.
+    # Triangularizamos el sistema utilizando eliminación gaussiana sin pivoteo.
+
     U, b_final, L = triangularizar_sin_pivoteo(A, b)
 
     # Después aplicamos sustitución regresiva.
